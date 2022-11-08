@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="slide-con">
+      <div class="slides blur">
+        <div class="numbertext">1 / 6</div>
+        <img src="images/pexels-eberhard-grossgasteiger-2086622.jpg" alt="A Nature Image"/>
+        <div class="text">The Chilly Blizzard</div>
+      </div>
+
+      <div class="slides blur">
+        <div class="numbertext">2 / 6</div>
+        <img src="images/pexels-artem-saranin-1547813.jpg" alt="Another Nature Image"/>
+        <div class="text">The Red Oak</div>
+      </div>
+
+      <div class="slides blur">
+        <div class="numbertext">3 / 6</div>
+        <img src="images/pexels-eberhard-grossgasteiger-6439051.jpg" alt="Another Nature Image"/>
+        <div class="text">A Ray of Hope</div>
+      </div>
+      <div class="slides blur">
+        <div class="numbertext">4 / 6</div>
+        <img src="images/pexels-eberhard-grossgasteiger-534164.jpg" alt="Another Nature Image"/>
+        <div class="text">One With Nature</div>
+      </div>
+      <div class="slides blur">
+        <div class="numbertext">5 / 6</div>
+        <img src="images/pexels-emre-can-acer-2189696.jpg" alt="Another Nature Image"/>
+        <div class="text">Winter is Here</div>
+      </div>
+      <div class="slides blur">
+        <div class="numbertext">6 / 6</div>
+        <img src="images/pexels-jaime-reimer-2662116.jpg" alt="Another Nature Image"/>
+        <div class="text">Indispensable Me</div>
+      </div>
+
+      <button class="button prev" onclick="moveSlides(-1)">&#8656</button>
+      <button class="button next" onclick="moveSlides(1)">&#8658</button>
+    </div>
+    <br />
+
+    <div style="text-align: center">
+      <span class="dot" onclick="activeSlide(1)"></span>
+      <span class="dot" onclick="activeSlide(2)"></span>
+      <span class="dot" onclick="activeSlide(3)"></span>
+      <span class="dot" onclick="activeSlide(4)"></span>
+      <span class="dot" onclick="activeSlide(5)"></span>
+      <span class="dot" onclick="activeSlide(6)"></span>
+    </div>
+
+    <script>
+      // declare relevant variables
+      const slideButton = document.querySelectorAll(".button");
+      const container = document.querySelector(".slide-con");
+      let slideIndex = 1;
+
+      displaySlides(slideIndex);
+
+      // arrow button handlers
+      function moveSlides(n) {
+        displaySlides((slideIndex += n));
+      }
+
+      // image slides handlers
+      function activeSlide(n) {
+        displaySlides((slideIndex = n));
+      }
+
+      function displaySlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("slides");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {
+          slideIndex = 1;
+        }
+        if (n < 1) {
+          slideIndex = slides.length;
+        }
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+      }
+      // visibility handlers
+      const hideButton = () => {
+        slideButton.forEach((button) => {
+          button.style.visibility = "hidden";
+        })
+      }
+      const showButton = () => {
+        slideButton.forEach((button) => {
+          button.style.visibility = "visible";
+        })
+      }
+      container.addEventListener("mouseover", showButton);
+      container.addEventListener("mouseout", hideButton);
+    </script>
+  </body>
+</html>
